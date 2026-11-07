@@ -1,16 +1,86 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# Campaign Performance Dashboard
 
-Currently, two official plugins are available:
+A responsive React dashboard designed to monitor and analyze existing campaign performance using interactive visualizations, KPI cards, and filters.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Organization-wide campaign overview
+- Campaign-specific performance analysis
+- Reusable KPI cards
+- Interactive bar and line charts
+- Campaign and date-range filters
+- Responsive desktop and mobile layouts
+- Client-side routing
+- API data fetching with Axios
+- Lazy loading and code splitting
+- Loading, error, and empty-data states
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the Oxlint configuration
+- React
+- JavaScript
+- HTML5 and CSS3
+- Vite
+- React Router
+- Recharts
+- Axios
+- Git and GitHub
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Getting Started
+
+### Prerequisites
+
+Node.js and npm
+
+### Installation
+
+1. Clone this repository:
+
+   git clone https://github.com/himajachundru/campaign-performance-dashboard.git
+
+2. Navigate into the project:
+
+   cd campaign-performance-dashboard
+
+3. Install dependencies:
+
+   npm install
+
+4. Start the development server:
+
+   npm run dev
+
+Open the local URL displayed in the terminal.
+
+## Production Build
+
+Run:
+
+    npm run build
+
+Preview the build:
+
+    npm run preview
+
+## Application Pages
+
+### Overview
+Displays overall campaign metrics, including total campaigns, targets, reach, achievement percentage, and campaign-wise progress bars.
+
+### Performance
+Displays individual campaign metrics and interactive visualizations, with campaign and date-range filtering.
+
+## Data Source
+
+This project uses fictional sample campaign data stored in `public/api/campaigns.json`. Data is retrieved through an HTTP request using Axios.
+
+No live backend or real organizational data is included.
+
+## Purpose
+
+This is a portfolio recreation demonstrating frontend concepts used in campaign performance monitoring, including reusable React components, REST-style data retrieval, responsive UI development, and performance optimization techniques.
+
+## Author
+
+Himaja Chundru
