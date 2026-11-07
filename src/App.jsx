@@ -103,16 +103,107 @@ function App() {
                         element={<Navigate to="/performance" replace />}
                     />
 
+
+
                     {/* Overview page */}
                     <Route
                         path="/overview"
                         element={
                             <section id="overview">
-                                <h2>Overview</h2>
-                                <p>Campaign metrics will appear here.</p>
+                                <h2>Campaign Overview</h2>
+                                <p>Summary of all existing campaigns</p>
+
+                                {loading && <p>Loading campaign data...</p>}
+
+                                {!loading && error && (
+                                    <p role="alert">{error}</p>
+                                )}
+
+                                {!loading && !error && campaigns.length === 0 && (
+                                    <p>No campaigns available.</p>
+                                )}
+
+                                {!loading && !error && campaigns.length > 0 && (
+                                    <>
+                                        <div className="kpi-grid">
+                                            <KPICard
+                                                title="Total Campaigns"
+                                                value={campaigns.length}
+                                            />
+                                            <KPICard
+                                                title="Overall Target"
+                                                value={campaigns
+                                                    .reduce((sum, c) => sum + c.target, 0)
+                                                    .toLocaleString()}
+                                            />
+                                            <KPICard
+                                                title="Total Reach"
+                                                value={campaigns
+                                                    .reduce(
+                                                        (sum, c) =>
+                                                            sum + c.monthly.reduce(
+                                                                (total, month) => total + month.value,
+                                                                0
+                                                            ),
+                                                        0
+                                                    )
+                                                    .toLocaleString()}
+                                            />
+                                            <KPICard
+                                                title="Overall Achievement"
+                                                value={`${(
+                                                    campaigns.reduce(
+                                                        (sum, c) =>
+                                                            sum + c.monthly.reduce(
+                                                                (total, month) => total + month.value,
+                                                                0
+                                                            ),
+                                                        0
+                                                    ) /
+                                                    campaigns.reduce((sum, c) => sum + c.target, 0) *
+                                                    100
+                                                ).toFixed(1)}%`}
+                                            />
+                                        </div>
+
+                                        <div className="chart-card">
+                                            <h3>Campaign-wise Progress</h3>
+
+                                            {campaigns.map(campaign => {
+                                                const reached = campaign.monthly.reduce(
+                                                    (sum, month) => sum + month.value,
+                                                    0
+                                                )
+
+                                                const percentage = campaign.target > 0
+                                                    ? (reached / campaign.target) * 100
+                                                    : 0
+
+                                                return (
+                                                    <div className="overview-progress" key={campaign.id}>
+                                                        <div className="overview-progress-label">
+                                                            <strong>{campaign.name}</strong>
+                                                            <span>{percentage.toFixed(1)}%</span>
+                                                        </div>
+
+                                                        <div className="overview-progress-track">
+                                                            <div
+                                                                className="overview-progress-fill"
+                                                                style={{
+                                                                    width: `${Math.min(percentage, 100)}%`
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </>
+                                )}
                             </section>
                         }
                     />
+
 
                     {/* Performance page */}
                     <Route
